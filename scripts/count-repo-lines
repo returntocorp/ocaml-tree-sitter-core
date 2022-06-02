@@ -33,7 +33,10 @@ mkdir -p "$workspace"
   cd "$workspace"
 
   if [[ ! -e "$repo_name" ]]; then
-    git clone --depth 1 "$url"
+    # Since we do not care about revision history or
+    # Git Large File Storage files, we can shallow clone
+    # and ignore LFS pointers to expedite cloning.
+    GIT_LFS_SKIP_SMUDGE=1 git clone --depth 1 "$url"
   fi
 
   (
