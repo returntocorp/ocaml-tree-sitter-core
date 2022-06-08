@@ -91,7 +91,7 @@ def parse_json_error_log():
     return clusters
 
 def print_csv_clusters(clusters):
-    writer = csv.writer(sys.stdout, quoting=csv.QUOTE_MINIMAL)
+    writer = csv.writer(sys.stdout, quoting=csv.QUOTE_MINIMAL, escapechar='\\')
     writer.writerow(['num errors', 'num lines', 'error class', 'code_location', 'code'])
     for _key, clus in sorted(clusters.items(), key = lambda c: -c[1]['num_errors']):
         code_locs_to_string = ';\n'.join(clus['code_location'])
